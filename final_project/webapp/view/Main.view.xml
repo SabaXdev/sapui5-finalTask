@@ -1,4 +1,4 @@
-<mvc:View controllerName="finalproject.controller.Main"
+<mvc:View controllerName="axalimoduli.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">

@@ -1,9 +1,9 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "axalimoduli/controller/Base.controller"
+], (BaseController) => {
     "use strict";
 
-    return Controller.extend("finalproject.controller.Main", {
+    return BaseController.extend("axalimoduli.controller.Main", {
         onInit() {
         }
     });

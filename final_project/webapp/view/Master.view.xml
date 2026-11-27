@@ -1,0 +1,47 @@
+<mvc:View
+    controllerName="axalimoduli.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="masterPage" title="{i18n>masterPageTitle}">
+        <subHeader>
+            <Toolbar id="masterToolbar">
+                <SearchField
+                    id="masterSearchField"
+                    width="100%"
+                    placeholder="{i18n>masterSearchPlaceholder}"
+                    liveChange=".onSearch"/>
+            </Toolbar>
+        </subHeader>
+        <headerContent>
+            <Button
+                id="createBtn"
+                type="Emphasized"
+                text="{i18n>createProductButton}"
+                press=".onCreateProduct"/>
+        </headerContent>
+        <content>
+            <List
+                id="masterList"
+                mode="SingleSelectMaster"
+                growing="true"
+                growingThreshold="20"
+                items="{
+                    path: 'oDataV2Model>/Products',
+                    sorter: { path: 'Name' }
+                }"
+                selectionChange=".onProductSelected">
+                <StandardListItem
+                    title="{oDataV2Model>Name}"
+                    description="{oDataV2Model>Description}"
+                    info="{
+                        parts: [
+                            { path: 'oDataV2Model>Price' },
+                            { path: 'oDataV2Model>Rating' }
+                        ],
+                        formatter: '.formatListItemInfo'
+                    }"
+                    type="Navigation"/>
+            </List>
+        </content>
+    </Page>
+</mvc:View>
