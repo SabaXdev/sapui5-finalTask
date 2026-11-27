@@ -1,0 +1,233 @@
+<mvc:View
+    controllerName="axalimoduli.controller.Product"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:form="sap.ui.layout.form">
+    <Page
+        id="productPage"
+        title="{view>/pageTitle}"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        enableScrolling="false">
+        <headerContent>
+            <Button
+                id="editBtn"
+                text="{i18n>editProductButton}"
+                type="Emphasized"
+                visible="{= !${view>/createMode} &amp;&amp; !${view>/editMode} }"
+                press=".onEdit"/>
+            <Button
+                id="saveBtn"
+                text="{i18n>addProductSaveButton}"
+                type="Emphasized"
+                visible="{= ${view>/editMode} || ${view>/createMode} }"
+                press=".onSave"/>
+            <Button
+                id="cancelBtn"
+                text="{i18n>addProductCancelButton}"
+                visible="{= ${view>/editMode} || ${view>/createMode} }"
+                press=".onCancel"/>
+            <Button
+                id="deleteBtn"
+                text="{i18n>deleteProductButton}"
+                type="Reject"
+                visible="{= !${view>/createMode} &amp;&amp; !${view>/editMode} }"
+                press=".onDelete"/>
+        </headerContent>
+        <content>
+            <uxap:ObjectPageLayout
+                id="productObjectPage"
+                upperCaseAnchorBar="false"
+                enableLazyLoading="true">
+                <uxap:headerTitle>
+                    <uxap:ObjectPageHeader
+                        id="productHeader"
+                        objectTitle="{Name}"/>
+                </uxap:headerTitle>
+                <uxap:sections>
+                    <uxap:ObjectPageSection
+                        id="productInfoSection"
+                        title="{i18n>productSectionTitle}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="productInfoSubSection">
+                                <uxap:blocks>
+                                    <form:SimpleForm
+                                        id="productInfoForm"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false">
+                                        <form:content>
+                                            <Label text="{i18n>addProductFieldId}" labelFor="productFieldId"/>
+                                            <Text
+                                                id="productFieldId"
+                                                visible="{= !${view>/editMode} &amp;&amp; !${view>/createMode} }"
+                                                text="{ID}"/>
+                                            <Input
+                                                id="productInputId"
+                                                visible="{= ${view>/editMode} || ${view>/createMode} }"
+                                                value="{ID}"
+                                                type="Number"
+                                                change=".onFieldChange"/>
+
+                                            <Label text="{i18n>addProductFieldName}" labelFor="productFieldName"/>
+                                            <Text
+                                                id="productFieldName"
+                                                visible="{= !${view>/editMode} &amp;&amp; !${view>/createMode} }"
+                                                text="{Name}"/>
+                                            <Input
+                                                id="productInputName"
+                                                visible="{= ${view>/editMode} || ${view>/createMode} }"
+                                                value="{Name}"
+                                                change=".onFieldChange"/>
+
+                                            <Label text="{i18n>addProductFieldDescription}" labelFor="productFieldDescription"/>
+                                            <Text
+                                                id="productFieldDescription"
+                                                visible="{= !${view>/editMode} &amp;&amp; !${view>/createMode} }"
+                                                text="{Description}"/>
+                                            <Input
+                                                id="productInputDescription"
+                                                visible="{= ${view>/editMode} || ${view>/createMode} }"
+                                                value="{Description}"
+                                                change=".onFieldChange"/>
+
+                                            <Label text="{i18n>addProductFieldReleaseDate}" labelFor="productFieldReleaseDate"/>
+                                            <Text
+                                                id="productFieldReleaseDate"
+                                                visible="{= !${view>/editMode} &amp;&amp; !${view>/createMode} }"
+                                                text="{
+                                                    path: 'ReleaseDate',
+                                                    type: 'sap.ui.model.type.Date',
+                                                    formatOptions: { style: 'medium' }
+                                                }"/>
+                                            <DatePicker
+                                                id="productInputReleaseDate"
+                                                visible="{= ${view>/editMode} || ${view>/createMode} }"
+                                                value="{
+                                                    path: 'ReleaseDate',
+                                                    type: 'sap.ui.model.type.Date',
+                                                    formatOptions: { style: 'medium' }
+                                                }"
+                                                change=".onFieldChange"/>
+
+                                            <Label text="{i18n>addProductFieldDiscontinuedDate}" labelFor="productFieldDiscontinuedDate"/>
+                                            <Text
+                                                id="productFieldDiscontinuedDate"
+                                                visible="{= !${view>/editMode} &amp;&amp; !${view>/createMode} }"
+                                                text="{
+                                                    path: 'DiscontinuedDate',
+                                                    type: 'sap.ui.model.type.Date',
+                                                    formatOptions: { style: 'medium' }
+                                                }"/>
+                                            <DatePicker
+                                                id="productInputDiscontinuedDate"
+                                                visible="{= ${view>/editMode} || ${view>/createMode} }"
+                                                value="{
+                                                    path: 'DiscontinuedDate',
+                                                    type: 'sap.ui.model.type.Date',
+                                                    formatOptions: { style: 'medium' }
+                                                }"
+                                                change=".onFieldChange"/>
+
+                                            <Label text="{i18n>addProductFieldRating}" labelFor="productFieldRating"/>
+                                            <ObjectNumber
+                                                id="productFieldRating"
+                                                visible="{= !${view>/editMode} &amp;&amp; !${view>/createMode} }"
+                                                number="{Rating}"
+                                                emphasized="false"/>
+                                            <Input
+                                                id="productInputRating"
+                                                visible="{= ${view>/editMode} || ${view>/createMode} }"
+                                                value="{Rating}"
+                                                type="Number"
+                                                change=".onFieldChange"/>
+
+                                            <Label text="{i18n>addProductFieldPrice}" labelFor="productFieldPrice"/>
+                                            <ObjectNumber
+                                                id="productFieldPrice"
+                                                visible="{= !${view>/editMode} &amp;&amp; !${view>/createMode} }"
+                                                number="{
+                                                    path: 'Price',
+                                                    type: 'sap.ui.model.type.Float',
+                                                    formatOptions: {
+                                                        minFractionDigits: 2,
+                                                        maxFractionDigits: 2
+                                                    }
+                                                }"
+                                                emphasized="false"/>
+                                            <Input
+                                                id="productInputPrice"
+                                                visible="{= ${view>/editMode} || ${view>/createMode} }"
+                                                value="{Price}"
+                                                change=".onFieldChange"/>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                    <uxap:ObjectPageSection
+                        id="supplierSection"
+                        title="{i18n>supplierSectionTitle}"
+                        visible="{= !${view>/createMode} }">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="supplierSubSection">
+                                <uxap:blocks>
+                                    <form:SimpleForm
+                                        id="supplierForm"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false">
+                                        <form:content>
+                                            <Label text="{i18n>addProductFieldId}" labelFor="supplierFieldId"/>
+                                            <Text id="supplierFieldId" text="{Supplier/ID}"/>
+                                            <Label text="{i18n>addProductFieldName}" labelFor="supplierFieldName"/>
+                                            <Text id="supplierFieldName" text="{Supplier/Name}"/>
+                                            <Label text="{i18n>supplierFieldStreet}" labelFor="supplierFieldStreet"/>
+                                            <Text id="supplierFieldStreet" text="{Supplier/Address/Street}"/>
+                                            <Label text="{i18n>supplierFieldCity}" labelFor="supplierFieldCity"/>
+                                            <Text id="supplierFieldCity" text="{Supplier/Address/City}"/>
+                                            <Label text="{i18n>supplierFieldState}" labelFor="supplierFieldState"/>
+                                            <Text id="supplierFieldState" text="{Supplier/Address/State}"/>
+                                            <Label text="{i18n>supplierFieldZipCode}" labelFor="supplierFieldZipCode"/>
+                                            <Text id="supplierFieldZipCode" text="{Supplier/Address/ZipCode}"/>
+                                            <Label text="{i18n>supplierFieldCountry}" labelFor="supplierFieldCountry"/>
+                                            <Text id="supplierFieldCountry" text="{Supplier/Address/Country}"/>
+                                            <Label text="{i18n>supplierFieldConcurrency}" labelFor="supplierFieldConcurrency"/>
+                                            <Text id="supplierFieldConcurrency" text="{Supplier/Concurrency}"/>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
+            </uxap:ObjectPageLayout>
+        </content>
+    </Page>
+</mvc:View>
